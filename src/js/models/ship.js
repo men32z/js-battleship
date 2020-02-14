@@ -1,4 +1,4 @@
-class Ship {
+export default class Ship {
   constructor() {
     this.positions = [];
   }

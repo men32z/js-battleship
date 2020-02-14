@@ -1,4 +1,4 @@
-class Position {
+export default class Position {
   constructor(id) {
     this.id = id;
     this.x= id % 10;
