@@ -1,3 +1,5 @@
+import Position from './position';
+
 export default class Ship {
   constructor() {
     this.positions = [];
@@ -19,6 +21,6 @@ export default class Ship {
     return this.positions.every(x => x.hited);
   }
   addPosition(position){
-    this.positions.push(position);
+    this.positions.push(new Position(position));
   }
 }
