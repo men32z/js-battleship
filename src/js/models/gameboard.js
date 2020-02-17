@@ -14,8 +14,7 @@ export default class Gameboard {
             ship.addPosition((start[z === 0 ? z : 0] * 10) + start[z === 1 ? z : 1]);
             start[z] += 1; 
         }
-        this.ships.push(ship);
-        
+        this.ships.push(ship);    
     }  
 }
 

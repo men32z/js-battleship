@@ -2,6 +2,7 @@ import Ship from '../../../src/js/models/ship';
 import Position from '../../../src/js/models/position';
 import Gameboard from '../../../src/js/models/gameboard';
 
+
 test('Place ship position', () => {
     let gameboard = new Gameboard();
     expect(gameboard.ships.length).toBe(0);
