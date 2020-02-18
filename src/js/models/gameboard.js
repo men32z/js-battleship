@@ -26,6 +26,9 @@ export default class Gameboard {
           this.ships.find(i => i.id === this.grid[pid]).hit(pid);
         }
         this.grid[pid] = "X";
+        return true;
+      }else{
+        return false;
       }
     }
 

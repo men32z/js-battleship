@@ -10,13 +10,15 @@ const gameLogic = (() =>{
   }
 
   const handleClick = (event) => {
-    let id = parseInt(event.target.id.split("-")[1]);
-    if (current) {
-      players[current ? 1 : 0].gameboard.receiveAttack(Math.floor(id / 10), id % 10)
+    let id = parseInt(event.target.id.split("-")[2]);
+
+    if (players[current ? 1 : 0].gameboard.receiveAttack(Math.floor(id / 10), id % 10)){
       current = !current;
       dom.render(players[current ? 1 : 0]);
-      dom.render(players[current ? 0 : 1]);
+      dom.render(players[current ? 0 : 1], true);
     }
+
+
   }
   return {setUp, handleClick}
 })();

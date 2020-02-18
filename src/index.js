@@ -1,5 +1,5 @@
 import Gameboard from './js/models/gameboard';
-import Player from './js/models/Player';
+import Player from './js/models/player';
 import dom from './js/dom';
 import gameLogic from './js/gameLogic';
 
@@ -41,5 +41,3 @@ dom.render(ai);
 dom.render(player, true);
 
 gameLogic.setUp(dom, player, ai);
-
-

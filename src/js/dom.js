@@ -42,7 +42,7 @@ const dom = (() => {
     for (let i = 1; i <= 100; i++) {
       let cp = player.gameboard.grid[i]; //current position
       toRend += `
-      <div id="position-${i}" class="${cp && cp !== 'X' ? 'ship' : ''}">
+      <div id="${player.gameboardName}-position-${i}" class="${cp && cp !== 'X' ? 'ship' : ''}">
         ${player.gameboard.grid[i] === 'X' ? 'X' : ''}
       </div>`;
     }
@@ -51,8 +51,9 @@ const dom = (() => {
 
     //events
     if (!blockEvents) {
+      console.log(blockEvents);
       for (let i = 1; i <= 100; i++) {
-        document.getElementById('position-'+i).addEventListener('click', (event) => controller.handleClick(event));
+        document.getElementById(`${player.gameboardName}-position-${i}`).addEventListener('click', (event) => controller.handleClick(event));
       }
     }
   }
