@@ -1,8 +1,9 @@
 import Position from './position';
 
 export default class Ship {
-  constructor() {
+  constructor(id) {
     this.positions = [];
+    this.id = id;
   }
   get length() {
     return this.positions.length;
