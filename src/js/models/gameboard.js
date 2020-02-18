@@ -29,4 +29,9 @@ export default class Gameboard {
         this.grid[pid] = "x";
       }
     }
+
+    allSunk(){
+      if (this.ships.length === 0) return false;
+      return this.ships.every(ship => ship.isSunk());
+    }
 }
