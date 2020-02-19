@@ -20,19 +20,21 @@ export default class Gameboard {
         this.ships.push(ship);
     }
 
-    receiveAttack(x, y){
+    receiveAttack(x, y) {
       let pid = (x * 10) + y;
-      if (this.grid[pid] !== "X" && this.grid[pid] !== "Y" ){
-        if (this.grid[pid]) {
-          this.ships.find(i => i.id === this.grid[pid]).hit(pid);
-          this.grid[pid] = "Y";
-        } else {
-          this.grid[pid] = "X";
-        }
+      if (this.grid[pid]) {
+        this.ships.find(i => i.id === this.grid[pid]).hit(pid);
+        this.grid[pid] = "Y";
         return true;
-      } else{
+      } else {
+        this.grid[pid] = "X";
         return false;
       }
+    }
+
+    validAttack(x, y){
+      let pid = (x * 10) + y;
+      return this.grid[pid] !== "X" && this.grid[pid] !== "Y";
     }
 
     allSunk(){

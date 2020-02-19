@@ -53,7 +53,6 @@ const dom = (() => {
       </div>`;
     }
     main.innerHTML = toRend;
-    message(`${player.ai ? 'Computer\'s' : 'your' } turn`);
 
     //events
     if (!blockEvents) {
@@ -67,7 +66,11 @@ const dom = (() => {
     message(`${player.ai ? 'AI is' : 'You are'} the winner!!!`)
   }
 
-  return {preRender, render, setController, winnerMessage}
+  const turnMessage = (player) => {
+    message(`${player.ai ? 'Computer\'s' : 'your' } turn`);
+  }
+
+  return {preRender, render, setController, winnerMessage, turnMessage}
 })();
 
 export default dom;
