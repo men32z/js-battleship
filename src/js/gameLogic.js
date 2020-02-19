@@ -3,6 +3,13 @@ const gameLogic = (() =>{
   let players = []
   let current = true; // true if is player 1
 
+  const currentPlayer = (ct = true) => {
+    let first = ct ? 0 : 1;
+    let second = ct ? 1 : 0;
+    return players[current ? first : second];
+  }
+
+
   const setUp = (d, p, p2) => {
     dom = d;
     players[0] = p;
@@ -13,37 +20,35 @@ const gameLogic = (() =>{
     let id;
     if (idnum){
       id = idnum;
-      console.log(event);
-      console.log(id);
     }else{
       id = parseInt(event.target.id.split("-")[2]);
-      console.log(id);
     }
 
-    if (players[current ? 1 : 0].gameboard.receiveAttack(Math.floor(id / 10), id % 10)){
-      current = !current;
-      dom.render(players[current ? 1 : 0]);
-      dom.render(players[current ? 0 : 1], true);
+    //no current receiveAttack
+    if (currentPlayer(false).gameboard.receiveAttack(Math.floor(id / 10), id % 10)){
+      dom.render(currentPlayer(), currentPlayer(false).ai);
+      dom.render(currentPlayer(false), true);
 
-      if(players[current ? 0 : 1].ai){
-        aiPlayer(players[current  ? 1 : 0]);
+      current = !current;
+      // if Artifical inteligence.
+
+      if (currentPlayer().gameboard.allSunk()) {
+        dom.render(currentPlayer(), true);
+        dom.render(currentPlayer(false), true);
+        dom.winnerMessage(currentPlayer(false));
+      } else if(currentPlayer().ai){
+        aiPlayer(currentPlayer(false));
       }
     }
-
-
   }
 
   const aiPlayer = (player) => {
-    // Grap the board
     let playerBoard = []
-    player.gameboard.grid.forEach((x, i) =>  { if (x !== "X") playerBoard.push(i);});
-    playerBoard.shift();
-    console.log(playerBoard);
+    player.gameboard.grid.forEach((x, i) =>  { if (x !== "X" || x !== "Y") playerBoard.push(i);});
+    if(playerBoard[0] === 0) playerBoard.shift();
     setTimeout(() =>{
       handleClick(false, playerBoard[Math.floor(Math.random() * playerBoard.length)]);
     }, 2000);
-
-
   }
 
   return {setUp, handleClick}

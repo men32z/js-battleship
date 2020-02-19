@@ -19,6 +19,7 @@ export default class Ship {
     });
   }
   isSunk(){
+    if(this.positions.length === 0) return false;
     return this.positions.every(x => x.hited);
   }
   addPosition(position){

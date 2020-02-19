@@ -3,6 +3,11 @@ const dom = (() => {
   const setController = (contro) => {
     controller = contro;
   }
+
+  const message = (message) => {
+    document.getElementById('message').innerHTML = message;
+  }
+
   const preRender = () => {
     let main = document.getElementById('content');
     main.innerHTML = `
@@ -35,30 +40,34 @@ const dom = (() => {
   }
 
   const render = (player, blockEvents = false) => {
-
-    let message = document.getElementById('message');
     let main = document.getElementById(player.gameboardName);
     let toRend = '';
     for (let i = 1; i <= 100; i++) {
       let cp = player.gameboard.grid[i]; //current position
+      let classes = cp && cp !== 'X' && !player.ai ? ['ship'] : [];
+      if(cp && cp === 'Y') classes.push('ship-border');
       toRend += `
-      <div id="${player.gameboardName}-position-${i}" class="${cp && cp !== 'X' ? 'ship' : ''}">
-        ${player.gameboard.grid[i] === 'X' ? 'X' : ''}
+      <div id="${player.gameboardName}-position-${i}"
+           class="${classes.join(' ')}">
+        ${cp === 'X' || cp === 'Y' ? 'X' : ''}
       </div>`;
     }
     main.innerHTML = toRend;
-    message.innerHTML = `${player.ia ? 'Computer\'s' : 'your' } turn`;
+    message(`${player.ai ? 'Computer\'s' : 'your' } turn`);
 
     //events
     if (!blockEvents) {
-      console.log(blockEvents);
       for (let i = 1; i <= 100; i++) {
         document.getElementById(`${player.gameboardName}-position-${i}`).addEventListener('click', (event) => controller.handleClick(event));
       }
     }
   }
 
-  return {preRender, render, setController}
+  const winnerMessage = (player) => {
+    message(`${player.ai ? 'AI is' : 'You are'} the winner!!!`)
+  }
+
+  return {preRender, render, setController, winnerMessage}
 })();
 
 export default dom;

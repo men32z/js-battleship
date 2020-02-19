@@ -19,7 +19,7 @@ test('Receive atack', () => {
     gameboard.placeShip([1,3], [4,3]);
     gameboard.receiveAttack(4, 3);
     expect(gameboard.ships[0].positions.find(x => x.id === 43).hited).toBeTruthy();
-    expect(gameboard.grid[43]).toBe("x");
+    expect(gameboard.grid[43] === 'X' || gameboard.grid[43] === 'Y').toBeTruthy();
   });
 
 test('All ships sunk', () => {
@@ -28,6 +28,6 @@ test('All ships sunk', () => {
     gameboard.placeShip([1,3], [1,3]);
     expect(gameboard.allSunk()).not.toBeTruthy();
     gameboard.receiveAttack(1, 3);
-    expect(gameboard.grid[13]).toBe("x");
+    expect(gameboard.grid[13] === 'X' || gameboard.grid[13] === 'Y').toBeTruthy();
     expect(gameboard.allSunk()).toBeTruthy();
   });
