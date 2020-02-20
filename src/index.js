@@ -2,10 +2,7 @@ import Gameboard from './js/models/gameboard';
 import Player from './js/models/player';
 import dom from './js/dom';
 import gameLogic from './js/gameLogic';
-
-
-dom.setController(gameLogic);
-dom.preRender();
+import initialLogic from './js/initialLogic';
 
 let exampleBoard = [
   [[1,2], [1,2]],
@@ -22,6 +19,14 @@ let exampleBoard = [
 
   [[6,4], [6,8]],
 ];
+
+
+initialLogic.setUp(exampleBoard);
+
+/*
+dom.setController(gameLogic);
+dom.preRender();
+
 
 let player = new Player(new Gameboard);
 player.gameboardName = 'first';
@@ -41,3 +46,5 @@ dom.render(ai);
 dom.render(player, true);
 
 gameLogic.setUp(dom, player, ai);
+
+*/

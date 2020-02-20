@@ -23,3 +23,9 @@ div.ship-border {
   border: solid red 1px;
   background-color: #ccc;
 }
+
+.firstItem {
+  background: red url('../img/drag.png');
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
