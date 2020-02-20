@@ -4,6 +4,10 @@ import dom from './js/dom';
 import gameLogic from './js/gameLogic';
 import initialLogic from './js/initialLogic';
 
+document.addEventListener("dragover", function(event) {
+  event.preventDefault();
+});
+
 let exampleBoard = [
   [[1,2], [1,2]],
   [[0,8], [0,8]],

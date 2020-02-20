@@ -31,7 +31,7 @@ const dom = (() => {
     `;
   }
 
-  const render = (grid) => {
+  const render = (grid, dragStart, dropping) => {
     let main = document.getElementById('ini');
     let toRend = '';
     for (let i = 1; i <= 100; i++) {
@@ -39,17 +39,26 @@ const dom = (() => {
       if(grid[i] && grid[i].first) classes.push('firstItem');
       toRend += `
       <div id="position-${i}" class="${classes.join(' ')}"
+      ${grid[i] ? 'data-shipid="'+grid[i].id+'"' : ''}
+
        ${grid[i] && grid[i].first ? 'draggable="true"' : ''}>
       </div>`;
     }
     main.innerHTML = toRend;
 
-    //events
-    // if (!blockEvents) {
-    //   for (let i = 1; i <= 100; i++) {
-    //     document.getElementById(`${player.gameboardName}-position-${i}`).addEventListener('click', (event) => controller.handleClick(event));
-    //   }
-    // }
+    // draggable events
+    for (let i = 1; i <= 100; i++) {
+      if (grid[i] && grid[i].first) {
+        document.getElementById(`position-${i}`).addEventListener('dragstart', (event) => dragStart(event));
+      }
+    }
+
+    // dropping events
+    for (let i = 1; i <= 100; i++) {
+      if (!grid[i]) {
+        document.getElementById(`position-${i}`).addEventListener('drop', event => dropping(event));
+      }
+    }
   }
 
 
