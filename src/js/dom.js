@@ -2,14 +2,14 @@ const dom = (() => {
   let controller;
   const setController = (contro) => {
     controller = contro;
-  }
+  };
 
   const message = (message) => {
     document.getElementById('message').innerHTML = message;
-  }
+  };
 
   const preRender = () => {
-    let main = document.getElementById('content');
+    const main = document.getElementById('content');
     main.innerHTML = `
     <div class="container-fluid bg-dark text-white text-center">
       <div class="container">
@@ -37,15 +37,15 @@ const dom = (() => {
       </div>
     </div>
     `;
-  }
+  };
 
   const render = (player, blockEvents = false) => {
-    let main = document.getElementById(player.gameboardName);
+    const main = document.getElementById(player.gameboardName);
     let toRend = '';
-    for (let i = 1; i <= 100; i++) {
-      let cp = player.gameboard.grid[i]; //current position
-      let classes = cp && cp !== 'X' && !player.ai ? ['ship'] : [];
-      if(cp && cp === 'Y') classes.push('ship-border');
+    for (let i = 1; i <= 100; i += 1) {
+      const cp = player.gameboard.grid[i]; // current position
+      const classes = cp && cp !== 'X' && !player.ai ? ['ship'] : [];
+      if (cp && cp === 'Y') classes.push('ship-border');
       toRend += `
       <div id="${player.gameboardName}-position-${i}"
            class="${classes.join(' ')}">
@@ -54,23 +54,26 @@ const dom = (() => {
     }
     main.innerHTML = toRend;
 
-    //events
+    // events
     if (!blockEvents) {
-      for (let i = 1; i <= 100; i++) {
-        document.getElementById(`${player.gameboardName}-position-${i}`).addEventListener('click', (event) => controller.handleClick(event));
+      for (let i = 1; i <= 100; i += 1) {
+        const item = document.getElementById(`${player.gameboardName}-position-${i}`);
+        item.addEventListener('click', controller.handleClick);
       }
     }
-  }
+  };
 
   const winnerMessage = (player) => {
-    message(`${player.ai ? 'AI is' : 'You are'} the winner!!!`)
-  }
+    message(`${player.ai ? 'AI is' : 'You are'} the winner!!!`);
+  };
 
   const turnMessage = (player) => {
-    message(`${player.ai ? 'Computer\'s' : 'your' } turn`);
-  }
+    message(`${player.ai ? 'Computer\'s' : 'your'} turn`);
+  };
 
-  return {preRender, render, setController, winnerMessage, turnMessage}
+  return {
+    preRender, render, setController, winnerMessage, turnMessage,
+  };
 })();
 
 export default dom;
