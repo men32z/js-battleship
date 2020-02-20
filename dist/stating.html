@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Setup Page</title>
+</head>
+<style>
+  .dbgcolor{
+    background-color: blueviolet;
+  }
+  .size{
+    
+    width: 200px;
+    height: 200px;
+    border: coral solid 1px;
+  }
+
+
+</style>
+<body>
+  <div class="container">
+    <div class="row col-12">
+      <div class="dbgcolor size" draggable='true' id="1"></div>
+      <div class="dbgcolor size" draggable='true'></div>
+      <div class="dbgcolor size" draggable='true'></div>
+      <div class="size" id="4"></div>
+    </div>
+  </div>
+  <script>
+
+    squares = document.getElementById('1');
+    s4 = document.getElementById('4');
+    console.log(squares);
+
+    squares.addEventListener('dragstart', event => { console.log("Dragging...");});
+
+    squares.addEventListener('drop', event => { 
+      event.preventDefault();
+      console.log("Dropping....");
+    });
+
+    
+  </script>
+</body>
+</html>
