@@ -10,6 +10,21 @@ You can find the original project specification at: [here]( https://www.theodinp
 
 [here](https://rawcdn.githack.com/men32z/js-battleship/ef03768ed885732346cd335e04ec3294159c4de8/dist/index.html)
 
+## Local Install
+
+```sh
+git clone https://github.com/men32z/js-battleship/tree/battleship
+cd js-battleship
+npm install
+npm run build
+```
+
+### Usage
+
+```sh
+npm run start
+```
+
 ## Built With:
 
 JavaScript, Jest, Bootstrap 4, Webpack.
