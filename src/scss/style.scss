@@ -1,0 +1,37 @@
+@import "bootstrap";
+
+
+
+.boxcontainer {
+  div {
+    border: 1px solid blue;
+    border-collapse: collapse;
+  }
+
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+
+  margin-top: 30px;
+}
+
+.ship {
+  background-color: red;
+}
+
+div.ship-border {
+  border: solid red 1px;
+  background-color: #ccc;
+}
+
+div.ship-destroyed {
+  color:white;
+  border: solid black 1px;
+  background-color: #f55d42;
+}
+
+.firstItem {
+  background: red url('../img/drag.png');
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
