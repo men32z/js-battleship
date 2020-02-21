@@ -47,7 +47,7 @@ const gameLogic = (() => {
         dom.render(currentPlayer(false), true);
         dom.winnerMessage(currentPlayer(false));
       } else if (currentPlayer().ai) {
-        let shoot = currentPlayer(false).getAiAttack(secondAttack);
+        const shoot = currentPlayer(false).getAiAttack(secondAttack);
         setTimeout(() => {
           handleClick(false, shoot);
         }, 2000);

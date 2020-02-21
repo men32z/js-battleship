@@ -4,7 +4,7 @@ export default class Player {
     this.gameboard = gameboard;
   }
 
-  getAiAttack(secondAttack){
+  getAiAttack(secondAttack) {
     const playerBoard = [];
     this.gameboard.grid.forEach((x, i) => { if (x !== 'X' && x !== 'Y') playerBoard.push(i); });
     if (playerBoard[0] === 0) playerBoard.shift();
