@@ -31,6 +31,11 @@ const gameLogic = (() => {
     // no current receiveAttack
     if (currentPlayer(false).gameboard.validAttack(Math.floor(id / 10), id % 10)) {
       if (currentPlayer(false).gameboard.receiveAttack(Math.floor(id / 10), id % 10)) {
+        const ship = currentPlayer(false).gameboard.getShip(id);
+        if (ship.isSunk()) {
+          currentPlayer(false).gameboard.sunkShip(ship);
+          dom.sunkMessage();
+        }
         dom.render(currentPlayer(), currentPlayer(false).ai);
         dom.render(currentPlayer(false));
         dom.turnMessage(currentPlayer());
@@ -39,6 +44,7 @@ const gameLogic = (() => {
         dom.render(currentPlayer(), currentPlayer(false).ai);
         dom.render(currentPlayer(false), true);
         current = !current;
+        dom.sunkMessage('');
         dom.turnMessage(currentPlayer());
       }
 

@@ -88,6 +88,7 @@ const initialLogic = (() => {
 
     const player = new Player(new Gameboard());
     player.gameboardName = 'first';
+    player.gameboard.fillGrid();
 
     ships.forEach((i) => {
       const idStart = i.positions[0].position;
@@ -100,6 +101,7 @@ const initialLogic = (() => {
 
     const ai = new Player(new Gameboard(), true);
     ai.gameboardName = 'second';
+    ai.gameboard.fillGrid();
 
     exampleBoard.forEach((item) => {
       ai.gameboard.placeShip(item[0], item[1]);

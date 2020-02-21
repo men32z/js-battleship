@@ -4,8 +4,8 @@ const dom = (() => {
     controller = contro;
   };
 
-  const message = (message) => {
-    document.getElementById('message').innerHTML = message;
+  const message = (message, field = 'message') => {
+    document.getElementById(field).innerHTML = message;
   };
 
   const preRender = () => {
@@ -33,6 +33,7 @@ const dom = (() => {
         </div>
         <div class="col-12 text-center mt-2">
           <h3 id="message"></h3>
+          <h4 id="destroy"></h4>
         </div>
       </div>
     </div>
@@ -44,12 +45,13 @@ const dom = (() => {
     let toRend = '';
     for (let i = 1; i <= 100; i += 1) {
       const cp = player.gameboard.grid[i]; // current position
-      const classes = cp && cp !== 'X' && !player.ai ? ['ship'] : [];
-      if (cp && cp === 'Y') classes.push('ship-border');
+      const classes = cp.ship && !player.ai ? ['ship'] : [];
+      if (cp.sunk) classes.push('ship-destroyed');
+      else if (cp && cp.ship && cp.hited) classes.push('ship-border');
       toRend += `
       <div id="${player.gameboardName}-position-${i}"
            class="${classes.join(' ')}">
-        ${cp === 'X' || cp === 'Y' ? 'X' : ''}
+        ${cp.hited ? 'X' : ''}
       </div>`;
     }
     main.innerHTML = toRend;
@@ -71,8 +73,12 @@ const dom = (() => {
     message(`${player.ai ? 'Computer\'s' : 'your'} turn`);
   };
 
+  const sunkMessage = (clean = 'Ship destroyed!!') => {
+    message(clean, 'destroy');
+  };
+
   return {
-    preRender, render, setController, winnerMessage, turnMessage,
+    preRender, render, setController, winnerMessage, turnMessage, sunkMessage,
   };
 })();
 

@@ -7,6 +7,28 @@ export default class Gameboard {
     this.counter = 1;
   }
 
+  fillGrid() {
+    this.grid.forEach((item, i) => {
+      this.grid[i] = { hited: false, ship: null, sunk: false };
+    });
+  }
+
+  getShip(id) {
+    let ship = false;
+    this.ships.forEach((item) => {
+      if (item.positions.find(x => x.id === id)) {
+        ship = item;
+      }
+    });
+    return ship || false;
+  }
+
+  sunkShip(ship) {
+    this.grid.forEach((i) => {
+      if (i.ship === ship.id) i.sunk = true;
+    });
+  }
+
   placeShip(sta, end) {
     const start = [...sta];
     const ship = new Ship(this.counter += 1);
@@ -14,7 +36,7 @@ export default class Gameboard {
     while (start[z] <= end[z]) {
       const position = (start[z === 0 ? z : 0] * 10) + start[z === 1 ? z : 1];
       ship.addPosition(position);
-      this.grid[position] = ship.id;
+      this.grid[position].ship = ship.id;
       start[z] += 1;
     }
     this.ships.push(ship);
@@ -22,18 +44,18 @@ export default class Gameboard {
 
   receiveAttack(x, y) {
     const pid = (x * 10) + y;
-    if (this.grid[pid]) {
-      this.ships.find(i => i.id === this.grid[pid]).hit(pid);
-      this.grid[pid] = 'Y';
+
+    this.grid[pid].hited = true;
+    if (this.grid[pid].ship) {
+      this.ships.find(i => i.id === this.grid[pid].ship).hit(pid);
       return true;
     }
-    this.grid[pid] = 'X';
     return false;
   }
 
   validAttack(x, y) {
     const pid = (x * 10) + y;
-    return this.grid[pid] !== 'X' && this.grid[pid] !== 'Y';
+    return !this.grid[pid].hited;
   }
 
   allSunk() {

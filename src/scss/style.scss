@@ -24,6 +24,12 @@ div.ship-border {
   background-color: #ccc;
 }
 
+div.ship-destroyed {
+  color:white;
+  border: solid black 1px;
+  background-color: #f55d42;
+}
+
 .firstItem {
   background: red url('../img/drag.png');
   background-repeat: no-repeat;

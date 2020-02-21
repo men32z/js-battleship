@@ -6,7 +6,7 @@ export default class Player {
 
   getAiAttack(secondAttack) {
     const playerBoard = [];
-    this.gameboard.grid.forEach((x, i) => { if (x !== 'X' && x !== 'Y') playerBoard.push(i); });
+    this.gameboard.grid.forEach((x, i) => { if (!x.hited) playerBoard.push(i); });
     if (playerBoard[0] === 0) playerBoard.shift();
     let ads = [];
 
